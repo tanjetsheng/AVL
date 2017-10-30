@@ -3,7 +3,7 @@
 #include "Node.h"
 Node *rotateLeft(Node *node);
 Node *rotateRight(Node *node);
-Node *rotateLeftright(Node *node);
+Node *rotateLeftRight(Node *node);
 Node *rotateRightLeft(Node *node);
 
 #endif // _ROTATE_H

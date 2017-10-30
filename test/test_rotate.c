@@ -8,7 +8,7 @@ Node node45,node50,node55;
 void initNode(Node *node,Node *left,Node *right,int bf){
   node->left = left;
   node->right = right;
-  node->balanceFactor = bf;
+  node->bf = bf;
 }
 
 void setUp(void)
@@ -83,7 +83,7 @@ void test_rotateLeft(void)
     initNode(&node25,NULL,NULL,0);
     initNode(&node40,NULL,NULL,0);
     initNode(&node30,&node25,&node40,0);
-    initNode(&node10,NULL,&node30,-2);
+    initNode(&node10,NULL,&node30,2);
 
     root = rotateLeft(&node10);
     TEST_ASSERT_EQUAL_PTR(&node30,root);
@@ -119,7 +119,7 @@ void test_rotateLeftRight(void)
     initNode(&node45,&node10,&node50,-2);
     initNode(&node50,NULL,NULL,0);
 
-    root = rotateLeftright(&node45);
+    root = rotateLeftRight(&node45);
     TEST_ASSERT_EQUAL_PTR(&node30,root);
     TEST_ASSERT_EQUAL_PTR(NULL,node25.left);
     TEST_ASSERT_EQUAL_PTR(NULL,node25.right);
