@@ -4,27 +4,6 @@
 #include "rotate.h"
 
 
-Node *addNode(Node **nodePtr,Node *newNode){
-  if(*nodePtr == NULL){
-    *nodePtr = newNode;
-     return *nodePtr;
-   }
-  else{
-  if((*nodePtr)->data > (newNode)->data){
-    (*nodePtr)->left = addNode((&(*nodePtr)->left),newNode);
-    return *nodePtr;
-  }
-  else if((*nodePtr)->data <(newNode)->data){
-    (*nodePtr)->right = addNode((&(*nodePtr)->right),newNode);
-    return *nodePtr;
-  }
-  else{
-    return *nodePtr;
-  }
-  }
-}
-
-
 int avlBalanceLeftTree(Node **rootPtr){
   Node *node = *rootPtr;
   Node *child = node->right;
@@ -101,9 +80,38 @@ int avlBalanceRightTree(Node **rootPtr){
   return 0;
 }
 
+Node *addNode(Node **nodePtr,Node *newNode){
+  if(*nodePtr == NULL){
+    *nodePtr = newNode;
+    return *nodePtr;
+   }
+  else{
+  if((*nodePtr)->data > (newNode)->data){
+      (*nodePtr)->bf -= 1;
+    (*nodePtr)->left = addNode((&(*nodePtr)->left),newNode);
 
+    //return *nodePtr;
+  }
+  else if((*nodePtr)->data <(newNode)->data){
+    (*nodePtr)->bf += 1;
+    (*nodePtr)->right = addNode((&(*nodePtr)->right),newNode);
 
-Node *addNodeBalance(Node **nodePtr,Node *newNode){
+    //return *nodePtr;
+  }
+    }
+  if((*nodePtr)->bf >= 2)
+        avlBalanceLeftTree(&(*nodePtr));
+  else if((*nodePtr)->bf <= -2)
+        avlBalanceRightTree(&(*nodePtr));
+    else{
+        *nodePtr = *nodePtr;
+      }
+    return *nodePtr;
+
+}
+
+/*Node *addNodeBalance(Node **nodePtr,Node *newNode){
   addNode(Node **nodePtr,Node *newNode);
 
 }
+*/

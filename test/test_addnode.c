@@ -70,7 +70,7 @@ void test_addnode_addNodeleft(void)
       TEST_ASSERT_EQUAL_PTR(NULL,node40.right);
 }
 
-void test_addnode_addNodemultiple(void)
+/*void test_addnode_addNodemultiple(void)
 {
       Node *root = &node25;
       initNode(&node20,NULL,NULL,0);
@@ -92,7 +92,7 @@ void test_addnode_addNodemultiple(void)
       TEST_ASSERT_EQUAL_PTR(&node40,node50.left);
       TEST_ASSERT_EQUAL_PTR(NULL,node50.right);
 }
-
+*/
 
 //left(balance)_2_0
 /**
@@ -513,4 +513,40 @@ void test_rotateRightLeftBalanced_grand_neg1(void)
     TEST_ASSERT_EQUAL(1,node40.bf);
     TEST_ASSERT_EQUAL(0,node35.bf);
     TEST_ASSERT_EQUAL(0,node50.bf);
+}
+
+
+/*          30(-1)              30(-2)            20
+/          /  \               /   \             /   \
+/        20    35   -->     20    35   -->    10     30
+/       /  \               /  \              /     /   \
+/      10   25          10     25``        5     25     35
+/                      /
+/                     5
+*/
+void test_addnode_addNoderight_andBalance(void)
+{
+      Node *root = &node30;
+      initNode(&node25,NULL,NULL,0);
+      initNode(&node10,NULL,NULL,0);
+      initNode(&node35,NULL,NULL,0);
+      initNode(&node20,&node10,&node25,0);
+      initNode(&node30,&node20,&node35,-1);
+
+      addNode(&root,&node5);
+      TEST_ASSERT_EQUAL_PTR(&node20,root);
+      TEST_ASSERT_EQUAL_PTR(NULL,node25.left);
+      TEST_ASSERT_EQUAL_PTR(NULL,node25.right);
+      TEST_ASSERT_EQUAL_PTR(&node5,node10.left);
+      TEST_ASSERT_EQUAL_PTR(NULL,node10.right);
+      TEST_ASSERT_EQUAL_PTR(NULL,node35.left);
+      TEST_ASSERT_EQUAL_PTR(NULL,node35.right);
+      TEST_ASSERT_EQUAL_PTR(&node25,node30.left);
+      TEST_ASSERT_EQUAL_PTR(&node35,node30.right);
+      TEST_ASSERT_EQUAL(0,node25.bf);
+      TEST_ASSERT_EQUAL(0,node35.bf);
+      TEST_ASSERT_EQUAL(0,node20.bf);
+      TEST_ASSERT_EQUAL(-1,node10.bf);
+      TEST_ASSERT_EQUAL(0,node5.bf);
+      TEST_ASSERT_EQUAL(0,node30.bf);
 }
