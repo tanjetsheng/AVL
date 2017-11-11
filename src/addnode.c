@@ -80,21 +80,37 @@ int avlBalanceRightTree(Node **rootPtr){
   return 0;
 }
 
-Node *addNode(Node **nodePtr,Node *newNode){
+int addNode(Node **nodePtr,Node *newNode){
+  int height;
   if(*nodePtr == NULL){
     *nodePtr = newNode;
-    return *nodePtr;
+    (*nodePtr)->left =NULL;
+    (*nodePtr)->right =NULL;
+    height =1;
+    return height;
    }
   else{
   if((*nodePtr)->data > (newNode)->data){
+    height = addNode((&(*nodePtr)->left),newNode);
+    if(height == 1)
       (*nodePtr)->bf -= 1;
-    (*nodePtr)->left = addNode((&(*nodePtr)->left),newNode);
+    if((*nodePtr)->bf == 0)
+          height = 0;
+    else {
+      (*nodePtr)->bf=(*nodePtr)->bf;
+    }
 
-    //return *nodePtr;
   }
   else if((*nodePtr)->data <(newNode)->data){
+    height = addNode((&(*nodePtr)->right),newNode);
+    if(height == 1)
     (*nodePtr)->bf += 1;
-    (*nodePtr)->right = addNode((&(*nodePtr)->right),newNode);
+    if((*nodePtr)->bf == 0)
+          height = 0;
+    else {
+        (*nodePtr)->bf=(*nodePtr)->bf;
+          }
+
 
     //return *nodePtr;
   }
@@ -106,7 +122,7 @@ Node *addNode(Node **nodePtr,Node *newNode){
     else{
         *nodePtr = *nodePtr;
       }
-    return *nodePtr;
+    return height;
 
 }
 
