@@ -4,45 +4,94 @@
 #include "rotate.h"
 #include "addnode.h"
 
-Node *getValue(Node *nodePtr){
+Node *getRightValue(Node *nodePtr){
   if(nodePtr->left!=NULL){
-    getValue(nodePtr->left);
+    getRightValue(nodePtr->left);
+  }
+  else{
+    return nodePtr;
+  }
+}
+
+Node *getLeftValue(Node *nodePtr){
+  if(nodePtr->right!=NULL){
+    getLeftValue(nodePtr->right);
   }
   else{
     return nodePtr;
   }
 }
 Node *removeNode(Node **nodePtr,Node *nodeToRemove){
-  if((*nodePtr)->data > (nodeToRemove)->data){
-    *nodePtr = removeNode((&(*nodePtr)->left),nodeToRemove);
+  int change;
+  if((*nodePtr) == NULL){
+    return NULL;
   }
+  else if((*nodePtr)->data > (nodeToRemove)->data){
+    if((*nodePtr)->left == nodeToRemove && (*nodePtr)->right != NULL){
+      (*nodePtr)->left = removeNode((&(*nodePtr)->left),nodeToRemove);
+      change = 0;
+    }
+    else if((*nodePtr)->left == nodeToRemove && (*nodePtr)->right == NULL){
+    (*nodePtr)->left = removeNode((&(*nodePtr)->left),nodeToRemove);
+  //  (*nodePtr)->bf +=1;
+    change = 1;
+  }
+  else{
+    (*nodePtr)->left = removeNode((&(*nodePtr)->left),nodeToRemove);
+    change = 0;
+  }
+  if(change = 1){
+    (*nodePtr)->bf +=1;
+  }
+  else{
+    (*nodePtr)->bf = (*nodePtr)->bf;
+    }
+}
+
   else if((*nodePtr)->data < (nodeToRemove)->data){
-    *nodePtr = removeNode((&(*nodePtr)->right),nodeToRemove);
+    (*nodePtr)->right = removeNode((&(*nodePtr)->right),nodeToRemove);
+      (*nodePtr)->bf -=1;
   }
-  else if((*nodePtr)->data == (nodeToRemove)->data){
+  else  if((*nodePtr)->data == (nodeToRemove)->data){
     if(((*nodePtr)->left == NULL) && ((*nodePtr)->right == NULL)){
+      (*nodePtr)->bf = 0;
       *nodePtr = NULL;
     }
     else if(((*nodePtr)->left != NULL) && ((*nodePtr)->right != NULL)){
-    //  Node *root = (*nodePtr)->right;
-      Node *temp = getValue((*nodePtr)->right);
-     removeNode(&(*nodePtr)->right,temp);
+      Node *temp = getRightValue((*nodePtr)->right);
+      removeNode(&(*nodePtr),temp);
+      temp->bf = (*nodePtr)->bf;
       temp->left = (*nodePtr)->left;
       temp->right = (*nodePtr)->right;
       *nodePtr = temp;
-    //  return *nodePtr;
-
     }
       else if(((*nodePtr)->left != NULL) && ((*nodePtr)->right == NULL)){
-      Node *root = (*nodePtr)->left;
-      Node *temp = getValue(root);
-      (*nodePtr)->left = removeNode(&(*nodePtr)->left,temp);
+      //Node *root = (*nodePtr)->left;
+      Node *temp = getLeftValue((*nodePtr)->left);
+      removeNode(&(*nodePtr),temp);
+      temp->bf = (*nodePtr)->bf;
       temp->left = (*nodePtr)->left;
       temp->right = (*nodePtr)->right;
       *nodePtr = temp;
-      //return *nodePtr;
-
     }
+    else if(((*nodePtr)->left == NULL) && ((*nodePtr)->right != NULL)){
+      Node *temp = getRightValue((*nodePtr)->right);
+      removeNode(&(*nodePtr),temp);
+      temp->bf = (*nodePtr)->bf;
+      temp->left = (*nodePtr)->left;
+      temp->right = (*nodePtr)->right;
+      *nodePtr = temp;
+    }
+    else {
+      return NULL;
+    }
+    return *nodePtr;
   }
+   if((*nodePtr)->bf >= 2){
+        avlBalanceLeftTree(&(*nodePtr));
+      }
+  else if((*nodePtr)->bf <= -2){
+        avlBalanceRightTree(&(*nodePtr));
+      }
   return *nodePtr;
 }
