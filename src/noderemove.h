@@ -6,6 +6,8 @@
 #include "addnode.h"
 
 Node *removeNode(Node **nodePtr,Node *nodeToRemove);
-Node *getValue(Node *nodePtr);
+Node *getRightValue(Node *nodePtr);
+Node *getLeftValue(Node *nodePtr);
+
 
 #endif // _NODEREMOVE_H
