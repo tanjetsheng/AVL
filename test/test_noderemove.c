@@ -275,24 +275,32 @@ void test_noderemove_remove_with_right_value_is_NULL3(void){
 }
 
 /*
-          20                      20
+
+          20                      25
         /   \                   /   \
       10    30      -->       10     30
-     /      / \                     / \
-    5      25  35                 25   35
+     /      / \               /       \
+    5      25  35            5         35
+
+
 */
 void test_noderemove_remove_with_right_value_is_NULL4(void)
 {
     Node *root = &node20;
-    initNode(&node20,&node10,&node30,-1);
+
+    initNode(&node20,&node10,&node30,0);
     initNode(&node10,&node5,NULL,-1);
     initNode(&node35,NULL,NULL,0);
+    initNode(&node25,NULL,NULL,0);
     initNode(&node30,&node25,&node35,0);
-    removeNode(&root,&node10);
-    //TEST_ASSERT_EQUAL_PTR(&node35,node30.right);
-    TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node10);
-    TEST_ASSERT_EQUAL_NODE(&node5,&node30,0,&node20);
-    //TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node35);
+    removeNode(&root,&node20);
+    TEST_ASSERT_EQUAL_NODE(&node5,NULL,-1,&node10);
+    TEST_ASSERT_EQUAL_NODE(&node10,&node30,0,&node25);
+    TEST_ASSERT_EQUAL_NODE(NULL,&node35,1,&node30);
+
+
+
+
 }
 /**
 ---------------------------------------remove 60----------------------------------------
@@ -307,6 +315,7 @@ void test_noderemove_remove_with_right_value_is_NULL4(void)
 *               35
 **/
 /*void test_remove_given_Avl_tree_remove_60_test2(void){
+
   Node *root = &node60;
   initNode(&node60,&node40,&node90,-1);
   initNode(&node40,&node20,&node50,-1);
@@ -320,6 +329,7 @@ void test_noderemove_remove_with_right_value_is_NULL4(void)
   initNode(&node55,NULL,NULL,0);
   initNode(&node80,NULL,NULL,0);
   initNode(&node100,NULL,NULL,0);
+
   removeNode(&root,&node40);
   TEST_ASSERT_EQUAL_NODE(&node30,&node90,0,&node60);
 }
