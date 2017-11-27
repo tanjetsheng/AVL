@@ -9,6 +9,7 @@ struct Node {
   Node *right;
   int bf;
   uint32_t data;
+  int change;
 };
 /*
 typedef struct StringNode StringNode;
