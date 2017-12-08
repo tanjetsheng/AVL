@@ -49,7 +49,7 @@ void tearDown(void)
 
 
 
-void test_noderemove_remove(void)
+/*void test_noderemove_remove(void)
 {
     Node *root = &node10;
     initNode(&node10,NULL,NULL,0);
@@ -64,7 +64,7 @@ void test_noderemove_remove(void)
     /
   5
 */
-void test_noderemove_remove_with_right_value_is_NULL(void)
+/*void test_noderemove_remove_with_right_value_is_NULL(void)
 {
     Node *root = &node20;
     initNode(&node20,&node10,&node30,-1);
@@ -83,7 +83,7 @@ void test_noderemove_remove_with_right_value_is_NULL(void)
     /   \                     /
   5      15                 5
 */
-void test_noderemove_remove_replace_with_right_value(void)
+/*void test_noderemove_remove_replace_with_right_value(void)
 {
     Node *root = &node20;
     initNode(&node20,&node10,&node30,-1);
@@ -107,7 +107,7 @@ void test_noderemove_remove_replace_with_right_value(void)
         /
       15
 */
-void test_noderemove_remove_replace_with_right_value2(void)
+/*void test_noderemove_remove_replace_with_right_value2(void)
 {
     Node *root = &node25;
     initNode(&node25,&node10,&node30,-1);
@@ -142,7 +142,7 @@ void test_noderemove_remove_replace_with_right_value2(void)
 *  20                               20
 *
 **/
-void test_RemoveNode_after_remove_rotate_right(void){
+/*void test_RemoveNode_after_remove_rotate_right(void){
 
     initNode(&node50,NULL,NULL,0);
     initNode(&node20,NULL,NULL,0);
@@ -169,7 +169,7 @@ void test_RemoveNode_after_remove_rotate_right(void){
 *  20  35                           20  35                                          35
 *
 **/
-void test_RemoveNode_after_remove_rotate_right_condition2(void){
+/*void test_RemoveNode_after_remove_rotate_right_condition2(void){
 
     initNode(&node50,NULL,NULL,0);
     initNode(&node35,NULL,NULL,0);
@@ -197,7 +197,7 @@ void test_RemoveNode_after_remove_rotate_right_condition2(void){
 *        70                                      70
 *
 **/
-void test_remove_given_a_avltree_need_rotateLeftRight_after_remove_condition1_expect_balance(void){
+/*void test_remove_given_a_avltree_need_rotateLeftRight_after_remove_condition1_expect_balance(void){
 
      initNode(&node45,NULL,NULL,0);
      initNode(&node70,NULL,NULL,0);
@@ -226,7 +226,7 @@ void test_remove_given_a_avltree_need_rotateLeftRight_after_remove_condition1_ex
              \
              45
 */
-void test_remove_and_replace_with_bottom_right(void){
+/*void test_remove_and_replace_with_bottom_right(void){
       initNode(&node30,&node20,&node50,1);
       initNode(&node20,&node15,NULL,-1);
       initNode(&node50,&node40,&node60,-1);
@@ -254,7 +254,7 @@ void test_remove_and_replace_with_bottom_right(void){
               \
               35
 */
-void test_noderemove_remove_with_right_value_is_NULL2(void)
+/*void test_noderemove_remove_with_right_value_is_NULL2(void)
 {
     Node *root = &node20;
     initNode(&node20,&node10,&node30,1);
@@ -267,7 +267,7 @@ void test_noderemove_remove_with_right_value_is_NULL2(void)
     TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node35);
 }
 
-void test_noderemove_remove_with_right_value_is_NULL3(void){
+/*void test_noderemove_remove_with_right_value_is_NULL3(void){
   Node *root = &node20;
   initNode(&node20,NULL,NULL,0);
   removeNode(&root,&node20);
