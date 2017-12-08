@@ -308,7 +308,7 @@ void test_noderemove_remove_with_right_value_is_NULL4(void)
 *              /     \                          / \
 *            20(1)   50(1)                    20    50
 *           / \        \                     /    /  \
-*         10   30(1)   55                   10     35   55
+*         10   30(1)   55                   10  35   55
 *               \
 *               35
 **/
@@ -326,10 +326,10 @@ void test_noderemove_remove_with_right_value_is_NULL5(void)
     removeNode(&root,&node40);
     TEST_ASSERT_EQUAL(&node20,node30.left);
     TEST_ASSERT_EQUAL(&node10,node20.left);
-    TEST_ASSERT_EQUAL(&node35,node40.left);
+    TEST_ASSERT_EQUAL(&node35,node50.left);
     TEST_ASSERT_EQUAL_NODE(&node20,&node40,0,&node30);
     TEST_ASSERT_EQUAL_NODE(&node10,NULL,-1,&node20);
-    TEST_ASSERT_EQUAL_NODE(&node35,&node55,0,&node40);
+    TEST_ASSERT_EQUAL_NODE(&node35,&node55,0,&node50);
     TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node10);
     TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node35);
     TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node55);
