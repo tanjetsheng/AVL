@@ -7,15 +7,8 @@ typedef struct Node Node;
 struct Node {
   Node *left;
   Node *right;
-  int bf;
+  int balanceFactor;
   uint32_t data;
-  int change;
 };
-/*
-typedef struct StringNode StringNode;
-struct StringNode {
-  StringNode *left;
-  StringNode *right;
-  char *data;
-};*/
+
 #endif // _NODE_H

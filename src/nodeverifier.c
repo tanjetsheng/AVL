@@ -20,16 +20,16 @@ char *createMessage(char *message, ...){
   return buffer;
 }
 
-void testAssertEqualNode(Node *left, Node *right, int bf, Node *node,int lineNo){
+void testAssertEqualNode(Node *left, Node *right, int balanceFactor, Node *node,int lineNo){
   char *error;
   if(left != node->left){
       error = createMessage("Expected left node to be 0x%p, but was %p",  \
                             left,node->left);
       UNITY_TEST_FAIL(lineNo,error);
     }
-  else if(bf != node->bf){
+  else if(balanceFactor != node->balanceFactor){
     error = createMessage("Expected balance factor to be 0x%d, but was %d",  \
-                          bf,node->bf);
+                          balanceFactor,node->balanceFactor);
     UNITY_TEST_FAIL(lineNo,error);
   }
 

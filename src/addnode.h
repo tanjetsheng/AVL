@@ -4,9 +4,11 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "rotate.h"
-int addNode(Node **nodePtr,Node *newNode);
-int avlBalanceLeftTree(Node **rootPtr);
-int avlBalanceRightTree(Node **rootPtr);
-Node *addNodeBalance(Node **nodePtr,Node *newNode);
+#include "avlint.h"
+
+
+#define avlAddInteger(nodePtr,newNode)  addNode(nodePtr,newNode,(Compare)IntegerCompare)
+int addNode(Node **nodePtr,Node *newNode,Compare IntegerCompare);
+
 
 #endif // _ADDNODE_H
