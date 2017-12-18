@@ -6,7 +6,8 @@
 #include "addnode.h"
 #include "avlint.h"
 
-#define avlRemoveInteger(rootPtr,nodeToRemove) RemoveNode(rootPtr,nodeToRemove,(Compare) IntegerCompare);
+#define avlRemoveInteger(rootPtr,nodeToRemove) RemoveNode(rootPtr,nodeToRemove,(Compare) IntegerCompare)
+#define avlRemoveString(rootPtr,nodeToRemove) RemoveNode(rootPtr,nodeToRemove,(Compare) StringCompare)
 Node *RemoveNode(Node **nodePtr, int nodeToRemove,Compare IntegerCompare);
 Node *avl_Remove(Node **nodePtr, int nodeToRemove, int *height,Compare IntegerCompare);
 Node *getValue(Node **nodePtr,int *height);
