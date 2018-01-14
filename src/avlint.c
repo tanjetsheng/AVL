@@ -1,6 +1,6 @@
 #include "avlint.h"
 
-int IntegerCompare(int data, Node *refNode)
+int IntegerCompare(int data, Node *refNode)       //compare function for int
 {
 
   if (data < refNode->data)
@@ -15,8 +15,8 @@ int IntegerCompare(int data, Node *refNode)
     return 0;
 }
 
-int StringCompare(char *data,StringNode *refNode){
-  int result = strcmp(data,refNode->data);
+int StringCompare(char *data,StringNode *refNode){    //compare function for
+  int result = strcmp(data,refNode->data);            //string
   if(result>0)
   return 1;
   else if(result<0)

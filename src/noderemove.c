@@ -6,10 +6,10 @@
 #include "avlint.h"
 
 
-Node *getValue(Node **nodePtr,int *height)
-{
-  Node *temp;
-  Node *child = (*nodePtr)->left;
+Node *getValue(Node **nodePtr,int *height)        //get the value from the most
+{                                                 //bottom and chack for the
+  Node *temp;                                     //height change and perform
+  Node *child = (*nodePtr)->left;                   //height change
 
   if(child != NULL)
   {

@@ -1,0 +1,83 @@
+#ifndef _ADDNODE_H
+#define _ADDNODE_H
+#include "Node.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "rotate.h"
+#include "avlint.h"
+
+
+#define avlAddInteger(nodePtr,newNode)  addNode(nodePtr,newNode,(Compare)IntegerCompare)
+#define avlAddString(nodePtr,newNode)  addNode(nodePtr,newNode,(Compare)StringCompare)
+int addNode(Node **nodePtr,Node *newNode,Compare IntegerCompare);
+
+
+#endif // _ADDNODE_H
+#ifndef _AVLINT_H
+#define _AVLINT_H
+#include "Node.h"
+
+typedef int(*Compare)(void *data,Node *refNode);
+
+
+int IntegerCompare(int data, Node *refNode);
+int StringCompare(char *data,StringNode *refNode);
+
+#endif // _AVLINT_H
+#ifndef _NODE_H
+#define _NODE_H
+
+#include <stdint.h>
+
+typedef struct Node Node;
+struct Node {
+  Node *left;
+  Node *right;
+  int balanceFactor;
+  uint32_t data;
+};
+
+typedef struct StringNode StringNode;
+struct StringNode {
+  StringNode *left;
+  StringNode *right;
+  int balanceFactor;
+  char *data;
+};
+#endif // _NODE_H
+#ifndef _NODEREMOVE_H
+#define _NODEREMOVE_H
+#include "stdio.h"
+#include "stdlib.h"
+#include "rotate.h"
+#include "addnode.h"
+#include "avlint.h"
+
+#define avlRemoveInteger(rootPtr,nodeToRemove) RemoveNode(rootPtr,nodeToRemove,(Compare) IntegerCompare)
+#define avlRemoveString(rootPtr,nodeToRemove) RemoveNode(rootPtr,nodeToRemove,(Compare) StringCompare)
+Node *RemoveNode(Node **nodePtr, int nodeToRemove,Compare IntegerCompare);
+Node *avl_Remove(Node **nodePtr, int nodeToRemove, int *height,Compare IntegerCompare);
+Node *getValue(Node **nodePtr,int *height);
+
+
+#endif // _NODEREMOVE_H
+#ifndef _NODEVERIFIER_H
+#define _NODEVERIFIER_H
+#include "Node.h"
+
+#define TEST_ASSERT_EQUAL_NODE(left,right,balanceFactor,node) \
+                          testAssertEqualNode(left,right,balanceFactor,node,__LINE__)
+
+void testAssertEqualNode(Node *left, Node *right, int balanceFactor, Node *node,int lineNo);
+#endif // _NODEVERIFIER_H
+#ifndef _ROTATE_H
+#define _ROTATE_H
+#include "Node.h"
+Node *rotateLeft(Node *node);
+Node *rotateRight(Node *node);
+Node *rotateLeftRight(Node *node);
+Node *rotateRightLeft(Node *node);
+int avlBalanceRightTree(Node **rootPtr);
+int avlBalanceLeftTree(Node **rootPtr);
+
+#endif // _ROTATE_H

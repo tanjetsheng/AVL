@@ -48,6 +48,29 @@ void tearDown(void)
 {
 }
 
+void test_adding_into_a_NULL(void){
+      Node *root = NULL;
+      avlAddInteger(&root,&node20);
+
+      TEST_ASSERT_EQUAL_PTR(&node20,root);
+      TEST_ASSERT_EQUAL_PTR(NULL,node20.left);
+      TEST_ASSERT_EQUAL_PTR(NULL,node20.right);
+}
+
+void test_creating_an_AVL_tree(void){
+  Node *root = NULL;
+  avlAddInteger(&root,&node20);
+  avlAddInteger(&root,&node10);
+  avlAddInteger(&root,&node30);
+  avlAddInteger(&root,&node5);
+  avlAddInteger(&root,&node15);
+
+  TEST_ASSERT_EQUAL_PTR(&node20,root);
+  TEST_ASSERT_EQUAL_NODE(&node10,&node30,-1,&node20);
+  TEST_ASSERT_EQUAL_NODE(&node5,&node15,0,&node10);
+  TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node30);
+}
+
 void test_addnode_addNoderight(void)
 {
       Node *root = &node25;
@@ -119,4 +142,22 @@ void test_addnode_addNodelef_with_not_changing_the_root_balance_factor(void)
       TEST_ASSERT_EQUAL(0,node10.balanceFactor);
       TEST_ASSERT_EQUAL(0,node5.balanceFactor);
       TEST_ASSERT_EQUAL(0,node15.balanceFactor);
+}
+
+/*                20                 20                     25
+/                   \                  \                  /     \
+/                    25       -->       25    -->       20        30
+/                                        \
+/                                         30
+*/
+
+void test_addnode_rotate(void)
+{
+      Node *root = &node20;
+      initNode(&node20,NULL,&node25,1);
+      initNode(&node25,NULL,NULL,0);
+
+      avlAddInteger(&root,&node30);
+      TEST_ASSERT_EQUAL_NODE(&node20,&node30,0,&node25);
+
 }

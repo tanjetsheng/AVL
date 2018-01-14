@@ -92,9 +92,9 @@ void test_addString(void){
 void test_noderemove_removeString(void)
 {
     Node *root = &nodeDanny;
-    initNode(&nodeDanny,&nodeWeiAik,&nodeAli,0);
-    initNode(&nodeAli,NULL,NULL,0);
-    initNode(&nodeWeiAik,NULL,NULL,0);
+    initStringNode(&nodeDanny,&nodeWeiAik,&nodeAli,0);
+    initStringNode(&nodeAli,NULL,NULL,0);
+    initStringNode(&nodeWeiAik,NULL,NULL,0);
     avlRemoveString(&root,"WeiAik");
     TEST_ASSERT_EQUAL_PTR(NULL,nodeDanny.left);
     TEST_ASSERT_EQUAL_PTR(&nodeAli,nodeDanny.right);
@@ -105,10 +105,10 @@ void test_noderemove_removeString(void)
 void test_noderemove_removeString_with_4_node(void)
 {
     Node *root = &nodeDanny;
-    initNode(&nodeDanny,&nodeWeiAik,&nodeAli,-1);
-    initNode(&nodeAli,NULL,NULL,0);
-    initNode(&nodeWeiAik,NULL,&nodeRex,1);
-    initNode(&nodeRex,NULL,NULL,0);
+    initStringNode(&nodeDanny,&nodeWeiAik,&nodeAli,-1);
+    initStringNode(&nodeAli,NULL,NULL,0);
+    initStringNode(&nodeWeiAik,NULL,&nodeRex,1);
+    initStringNode(&nodeRex,NULL,NULL,0);
     avlRemoveString(&root,"Rex");
     TEST_ASSERT_EQUAL_PTR(&nodeWeiAik,nodeDanny.left);
     TEST_ASSERT_EQUAL_PTR(&nodeAli,nodeDanny.right);
