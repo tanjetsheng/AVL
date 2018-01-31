@@ -9,6 +9,7 @@
 
 Node node1,node5 , node10,node15,node20,node25,node30,node35,node40;
 Node node45,node50,node55,node60,node65,node70,node75,node80,node85,node90,node95,node100;
+Node node120,node150,node200,node250;
 
 void initNode(Node *node,Node *left,Node *right,int bf){
   node->left = left;
@@ -38,6 +39,10 @@ void setUp(void)
   node90.data = 90;
   node95.data = 95;
   node100.data = 100;
+  node120.data = 120;
+  node150.data = 150;
+  node200.data = 200;
+  node250.data = 250;
 }
 
 void tearDown(void)

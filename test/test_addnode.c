@@ -7,6 +7,7 @@
 
 Node node1,node5 , node10,node15,node20,node25,node30,node35,node40;
 Node node45,node50,node55,node60,node65,node70,node75,node80,node85,node90,node95,node100;
+Node node120,node150,node200,node250;
 StringNode nodeAli,nodeBaba,nodeAfa;
 
 void initNode(Node *node,Node *left,Node *right,int balanceFactor){
@@ -38,6 +39,10 @@ void setUp(void)
   node90.data = 90;
   node95.data = 95;
   node100.data = 100;
+  node120.data = 120;
+  node150.data = 150;
+  node200.data = 200;
+  node250.data = 250;
 
   nodeAli.data="Ali";
   nodeBaba.data="Baba";
@@ -159,5 +164,22 @@ void test_addnode_rotate(void)
 
       avlAddInteger(&root,&node30);
       TEST_ASSERT_EQUAL_NODE(&node20,&node30,0,&node25);
+
+}
+
+void test_mainAVL(void){
+  Node *root = NULL;
+
+  avlAddInteger(&root,&node5);
+  avlAddInteger(&root,&node25);
+  avlAddInteger(&root,&node40);
+  avlAddInteger(&root,&node50);
+  avlAddInteger(&root,&node55);
+
+  TEST_ASSERT_EQUAL_NODE(&node5,&node50,1,&node25);
+  TEST_ASSERT_EQUAL_NODE(&node40,&node55,0,&node50);
+  TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node5);
+  TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node55);
+  TEST_ASSERT_EQUAL_NODE(NULL,NULL,0,&node40);
 
 }

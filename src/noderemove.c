@@ -9,51 +9,43 @@
 Node *getValue(Node **nodePtr,int *height)        //get the value from the most
 {                                                 //bottom and chack for the
   Node *temp;                                     //height change and perform
-  Node *child = (*nodePtr)->left;                   //height change
+//  Node *child = (*nodePtr)->left;                   //height change
 
-  if(child != NULL)
+  if(*nodePtr == NULL)
   {
-    if(child->left != NULL)
-      getValue(&(*nodePtr)->left,height);
-      else
-      {
-        if(child->right != NULL)
-        {
-          (*nodePtr)->left = child->right;
-          (*nodePtr)->balanceFactor++;
-          child->right = NULL;
-          if((*nodePtr)->balanceFactor !=0)
-          *height = 0;
-          else
-          *height = 1;
-        }
-        else
-        {
-          (*nodePtr)->left = NULL;
-          (*nodePtr)->balanceFactor++;
-
-          if((*nodePtr)->balanceFactor >= 2)
-            avlBalanceRightTree(&(*nodePtr));
-          else if((*nodePtr)->balanceFactor <= -2)
-            avlBalanceLeftTree(&(*nodePtr));
-          else{
-            *nodePtr = *nodePtr;
-          }
-          if((*nodePtr)->balanceFactor !=0)
-          *height = 0;
-          else
-          *height = 1;
-        }
-        return child;
-      }
-    }
-  else
-    {
-      temp = *nodePtr;
       *height = 1;
-      *nodePtr = NULL;
+      return NULL;
+  }
+  if((*nodePtr)->left != NULL)
+  {
+      temp = getValue(&(*nodePtr)->left,height);
+      if(*height == 1)
+            (*nodePtr)->balanceFactor++;
+      else
+            (*nodePtr)->balanceFactor = (*nodePtr)->balanceFactor;
+      if((*nodePtr)->balanceFactor >= 2)
+              avlBalanceRightTree(&(*nodePtr));
+      else if((*nodePtr)->balanceFactor <= -2)
+              avlBalanceLeftTree(&(*nodePtr));
+      else{
+              *nodePtr = *nodePtr;
+            }
+     if((*nodePtr)->balanceFactor !=0)
+            *height = 0;
+    if((temp)->right != NULL)
+      {
+        (*nodePtr)->left = temp->right;
+          temp->right = NULL;
+      }
       return temp;
     }
+    else
+      {
+        temp = *nodePtr;
+        *height = 1;
+        *nodePtr = NULL;
+        return temp;
+      }
 }
 
 
@@ -96,6 +88,7 @@ Node *avl_Remove(Node **nodePtr, int nodeToRemove, int *height,Compare IntegerCo
                 else
                 {
                   *nodePtr =  Remove;
+                  *height = 1;
                 }
               }
             else
@@ -109,8 +102,10 @@ Node *avl_Remove(Node **nodePtr, int nodeToRemove, int *height,Compare IntegerCo
                 else
                 *height = 1;
               }
-              else
+              else{
+                *height = 1;
               (*nodePtr)->balanceFactor = (*nodePtr)->balanceFactor;
+            }
                 if(temp->right != NULL)
                 {
                     temp->left = (*nodePtr)->left;
@@ -130,17 +125,27 @@ Node *avl_Remove(Node **nodePtr, int nodeToRemove, int *height,Compare IntegerCo
     {
       return *nodePtr;
     }
-    if((*nodePtr)->balanceFactor >= 2)
+    if((*nodePtr)->balanceFactor >= 2){
       avlBalanceRightTree(&(*nodePtr));
-    else if((*nodePtr)->balanceFactor <= -2)
+      if((*nodePtr)->balanceFactor !=0)
+      *height = 0;
+      else
+      *height = 1;
+}
+    else if((*nodePtr)->balanceFactor <= -2){
       avlBalanceLeftTree(&(*nodePtr));
+      if((*nodePtr)->balanceFactor !=0)
+      *height = 0;
+      else
+      *height = 1;
+    }
     else
     {
       *nodePtr = *nodePtr;
     }
     if((*nodePtr)->balanceFactor !=0)
     *height = 0;
-    else
+    if((*nodePtr)->left==NULL&&(*nodePtr)->right==NULL)
     *height = 1;
     return *nodePtr;
 }

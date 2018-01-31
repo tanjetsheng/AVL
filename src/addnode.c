@@ -39,16 +39,22 @@ int addNode(Node **nodePtr,Node *newNode,Compare IntegerCompare){
        if(height==1){
        (*nodePtr)->balanceFactor += 1;
          if((*nodePtr)->balanceFactor==0)
-           height=0;;
+           height=0;
          }
        else
          (*nodePtr)->balanceFactor =(*nodePtr)->balanceFactor;
      }
    }
-   if((*nodePtr)->balanceFactor >= 2)       //rotate function
+   if((*nodePtr)->balanceFactor >= 2) {      //rotate function
        avlBalanceRightTree(&(*nodePtr));
-   else if((*nodePtr)->balanceFactor <= -2)
+       if((*nodePtr)->balanceFactor == 0)
+         height=0;
+     }
+   else if((*nodePtr)->balanceFactor <= -2){
        avlBalanceLeftTree(&(*nodePtr));
+       if((*nodePtr)->balanceFactor == 0)
+         height=0;
+       }
    else{
       *nodePtr = *nodePtr;
      }
